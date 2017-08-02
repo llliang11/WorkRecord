@@ -1,0 +1,2 @@
+CAudioPlayer 封装了sdl进行声音输出，并且在输出到sdl接口时，利用了ffmpeg进行多重声音的resample
+RingBuffer 实现了数据的缓冲配置
