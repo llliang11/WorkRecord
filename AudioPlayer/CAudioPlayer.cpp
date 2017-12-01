@@ -110,7 +110,14 @@ bool CAudioPlayer::Open(const uint32_t rate, const uint32_t channel, const uint3
     if (mSampleRate != mTargetSampleRate && mAvr == NULL)
     {
         mAvr = avresample_alloc_context();
-        av_opt_set_int(mAvr, "in_channel_layout",  AV_CH_LAYOUT_MONO, 0);
+		if (mPlayerType == CHANNEL_TYPE_MEDIA)
+		{
+			av_opt_set_int(mAvr, "in_channel_layout",  AV_CH_LAYOUT_STEREO, 0);
+		}
+		else{
+			av_opt_set_int(mAvr, "in_channel_layout",  AV_CH_LAYOUT_MONO, 0);
+		}
+
         av_opt_set_int(mAvr, "out_channel_layout", AV_CH_LAYOUT_STEREO,  0);
         av_opt_set_int(mAvr, "in_sample_rate",     mSampleRate,                0);
         av_opt_set_int(mAvr, "out_sample_rate",    mTargetSampleRate,                0);
